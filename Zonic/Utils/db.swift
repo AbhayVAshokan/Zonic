@@ -139,3 +139,17 @@ func removeFavorite(db: Connection?, id: Int64) {
         print(error)
     }
 }
+
+func updateFavorite(db: Connection?, id: Int64, to label: String) {
+    do {
+        guard let db = db else { return }
+        
+        let favorites = SQLite.Table("favorites")
+        let favorite_id = SQLite.Expression<Int64>("id")
+        let favorite_label = SQLite.Expression<String>("label")
+        
+        try db.run(favorites.filter(favorite_id == id).update(favorite_label <- label))
+    } catch {
+        print(error)
+    }
+}
