@@ -1,5 +1,6 @@
 import SwiftUI
 import SQLite
+import AppKit
 
 @main
 struct ZyloqApp: App {
@@ -9,7 +10,7 @@ struct ZyloqApp: App {
     @State var db: Connection? = loadDb()
 
     var body: some Scene {
-        MenuBarExtra("67", systemImage: "\(7).circle") {
+        MenuBarExtra("₪") {
             VStack {
                 
                 if !favorites.isEmpty {
@@ -44,13 +45,26 @@ struct ZyloqApp: App {
                 
                 if !places.isEmpty {
                     ForEach(places, id: \.id) { place in
-                        HStack {
-                            Text(place.flag)
-                            Text(place.name)
-                            Spacer()
-                            TimeField(timezone: place.timezone)
+                        Button {
+                            print(place.name)
+                        } label: {
+                            HStack {
+                                Text(place.flag)
+                                Text(place.name)
+                                Spacer()
+                                TimeField(timezone: place.timezone)
+                            }
+                            .padding(.vertical, 2)
+                            .contentShape(Rectangle())
+                            .onHover { hovering in
+                                if hovering {
+                                    NSCursor.pointingHand.push()
+                                } else {
+                                    NSCursor.pop()
+                                }
+                            }
                         }
-                        .padding(.vertical, 2)
+                        .buttonStyle(.plain)
                         .opacity(favorites.contains(where: { $0.place.id == place.id }) ? 0.5 : 1)
                     }
                 }
