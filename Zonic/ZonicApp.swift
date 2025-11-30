@@ -27,6 +27,7 @@ struct ZyloqApp: App {
                 }
 
                 if favorites.count < 15 {
+//                    TODO: Auto-focus the text field on appear.
                     TextField("Enter your city", text: $searchText)
                         .onChange(of: searchText) { _, val in
                             places = fetchPlaces(db: db, searchText: searchText)
@@ -50,6 +51,7 @@ struct ZyloqApp: App {
                             TimeField(timezone: place.timezone)
                         }
                         .padding(.vertical, 2)
+                        .opacity(favorites.contains(where: { $0.place.id == place.id }) ? 0.5 : 1)
                     }
                 }
 
