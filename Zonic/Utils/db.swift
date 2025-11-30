@@ -2,7 +2,7 @@ import Foundation
 import SQLite
 
 func loadDb() -> Connection? {
-//    TODO: use db.sqlite3.gz instead of db.sqlite3
+// TODO: reduce bundle size by shipping db.sqlite3.gz (5MB) instead of db.sqlite3 (19.6MB)
     do {
         guard let fileURL = Bundle.main.url(forResource: "db", withExtension: "sqlite3") else { return nil }
         let db = try Connection(fileURL.path)

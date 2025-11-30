@@ -67,6 +67,9 @@ struct ZyloqApp: App {
             .onAppear {
                 favorites = fetchFavorites(db: db)
             }
+            .onDisappear {
+                searchText = ""
+            }
         }
         .menuBarExtraStyle(.window)
     }
