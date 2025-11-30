@@ -20,6 +20,19 @@ struct ZyloqApp: App {
                             Text(favorite.place.name)
                             Spacer()
                             TimeField(timezone: favorite.place.timezone)
+                            Menu {
+                                Button("Edit") {
+                                    // TODO: Implement edit functionality
+                                    print("Edit functionality for favorite \(favorite.id) needs to be implemented.")
+                                }
+                                Button("Delete") {
+                                    removeFavorite(db: db, id: favorite.id)
+                                    favorites = fetchFavorites(db: db)
+                                }
+                            } label: {}
+                            .menuStyle(.borderlessButton)
+                            .fixedSize()
+                            .buttonStyle(.plain)
                         }
                         .padding(.vertical, 2)
                     }
@@ -45,8 +58,13 @@ struct ZyloqApp: App {
                 
                 if !places.isEmpty {
                     ForEach(places, id: \.id) { place in
+                        let isFavorite = favorites.contains(where: { $0.place.id == place.id })
+                        
                         Button {
-                            print(place.name)
+                            if !isFavorite {
+                                addFavorite(db: db, place: place)
+                                favorites = fetchFavorites(db: db)
+                            }
                         } label: {
                             HStack {
                                 Text(place.flag)
@@ -65,7 +83,7 @@ struct ZyloqApp: App {
                             }
                         }
                         .buttonStyle(.plain)
-                        .opacity(favorites.contains(where: { $0.place.id == place.id }) ? 0.5 : 1)
+                        .opacity(isFavorite ? 1 : 0.5)
                     }
                 }
 

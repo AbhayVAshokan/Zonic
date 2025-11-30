@@ -4,10 +4,20 @@ import SQLite
 func loadDb() -> Connection? {
 // TODO: reduce bundle size by shipping db.sqlite3.gz (5MB) instead of db.sqlite3 (19.6MB)
     do {
-        guard let fileURL = Bundle.main.url(forResource: "db", withExtension: "sqlite3") else { return nil }
+        let fileManager = FileManager.default
+        let documentDirectory = try fileManager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
+        let fileURL = documentDirectory.appendingPathComponent("db.sqlite3")
+
+        if !fileManager.fileExists(atPath: fileURL.path) {
+            if let bundleURL = Bundle.main.url(forResource: "db", withExtension: "sqlite3") {
+                try fileManager.copyItem(at: bundleURL, to: fileURL)
+            }
+        }
+        
         let db = try Connection(fileURL.path)
         return db
     } catch {
+        print(error)
         return nil
     }
 }
@@ -100,5 +110,32 @@ func fetchFavorites(db: Connection?) -> [Favorite] {
     } catch {
         print(error)
         return []
+    }
+}
+
+func addFavorite(db: Connection?, place: Place) {
+    do {
+        guard let db = db else { return }
+
+        let favorites = SQLite.Table("favorites")
+        let place_id = SQLite.Expression<Int64>("place_id")
+        let label = SQLite.Expression<String>("label")
+        
+        try db.run(favorites.insert(place_id <- place.id, label <- place.name))
+    } catch {
+        print(error)
+    }
+}
+
+func removeFavorite(db: Connection?, id: Int64) {
+    do {
+        guard let db = db else { return }
+        
+        let favorites = SQLite.Table("favorites")
+        let favoriteId = SQLite.Expression<Int64>("id")
+        
+        try db.run(favorites.filter(favoriteId == id).delete())
+    } catch {
+        print(error)
     }
 }
