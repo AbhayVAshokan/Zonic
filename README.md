@@ -27,6 +27,10 @@ A macOS Menu Bar application that displays the current time for the cities in di
     - Go to **General** > **Login Items**.
     - Click the **+** button under "Open at Login" and select `Zonic.app` from your `/Applications` folder.
 
+## Data Source
+
+The `db.sqlite3` database is constructed from information sourced from Wikidata, compiled through the [dr5hn/countries-states-cities-database](https://github.com/dr5hn/countries-states-cities-database) project.
+
 ## Development
 
 ### Prerequisites
