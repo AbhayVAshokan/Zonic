@@ -2,7 +2,6 @@
 
 A macOS Menu Bar application that displays the current time for the cities in different timezones across the world. Quickly search for cities and add them to your favorites for instant access to their local time.
 
-
 <table style="border: none" cellspacing="0" cellpadding="0">
   <tr>
     <td width="50%" align="center">
@@ -19,14 +18,14 @@ A macOS Menu Bar application that displays the current time for the cities in di
 > Supported on macOS 14 (Sonoma) or newer.
 
 1.  **Download the latest release:**
-    Grab the `Zonic` App from the [GitLab Releases page](https://gitlab.com/abhayvashokan/Zonic/-/releases).
+    Download the `Zonic` App from the [GitLab Releases page](https://gitlab.com/abhayvashokan/Zonic/-/releases) and extract the Zip file.
 2.  **Move to Applications folder:**
     Drag `Zonic.app` to your `/Applications` folder.
 3.  **Add to Login Items (Optional):**
     For Zonic to launch automatically when you log in, add it to your Login Items:
-    *   Open **System Settings** (or System Preferences).
-    *   Go to **General** > **Login Items**.
-    *   Click the **+** button under "Open at Login" and select `Zonic.app` from your `/Applications` folder.
+    - Open **System Settings** (or System Preferences).
+    - Go to **General** > **Login Items**.
+    - Click the **+** button under "Open at Login" and select `Zonic.app` from your `/Applications` folder.
 
 ## Development
 
@@ -71,6 +70,7 @@ The application will appear in your macOS menu bar. Click on the menu bar icon t
 | created_at | DATETIME | NOT NULL DEFAULT CURRENT_TIMESTAMP          |
 
 ## Roadmap
+
 - Allow editing of favorite labels.
 - Auto-focus search text field on appear.
 - Reduce bundle size of the bundle by using a compressed DB.
