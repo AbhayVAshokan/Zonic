@@ -8,6 +8,7 @@ struct ZyloqApp: App {
   @State var places: [Place] = [];
   @State var favorites: [Favorite] = []
   @State var db: Connection? = loadDb()
+  @State private var showAbout = false
   
   var body: some Scene {
     MenuBarExtra("₪") {
@@ -102,6 +103,11 @@ struct ZyloqApp: App {
         Divider()
         
         HStack {
+          Button("About") {
+            showAbout.toggle()
+          }
+          .buttonStyle(.plain)
+          
           Spacer()
           Button("Quit") {
             NSApplication.shared.terminate(self)
@@ -115,6 +121,21 @@ struct ZyloqApp: App {
       }
       .onDisappear {
         searchText = ""
+      }
+      .sheet(isPresented: $showAbout) {
+        VStack(spacing: 16) {
+          Text("Zonic").font(.headline)
+          
+          Text("Information from this database is made available under the Open Database License (ODbL).")
+          .multilineTextAlignment(.center)
+          .font(.caption)
+          
+          Button("Done") {
+            showAbout = false
+          }
+        }
+        .padding()
+        .frame(minWidth: 300)
       }
     }
     .menuBarExtraStyle(.window)
