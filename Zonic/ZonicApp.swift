@@ -37,7 +37,7 @@ struct ZyloqApp: App {
           Divider()
         }
         
-        if favorites.count < 15 {
+        if favorites.count < 20 {
           //                    TODO: Auto-focus the text field on appear.
           TextField("Enter your city", text: $searchText)
             .onChange(of: searchText) { _, val in
@@ -93,7 +93,7 @@ struct ZyloqApp: App {
             }
           }
         } else {
-          Text("Max. 15 favorites are permitted")
+          Text("Max. 20 favorites are permitted")
             .onAppear {
               searchText = ""
               places = []
