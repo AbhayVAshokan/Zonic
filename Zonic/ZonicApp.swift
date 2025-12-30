@@ -103,10 +103,20 @@ struct ZyloqApp: App {
         Divider()
         
         HStack {
-          Button("About") {
-            showAbout.toggle()
-          }
+          Button("ⓘ") {}
           .buttonStyle(.plain)
+          .onHover(perform: { hovering in
+            showAbout = hovering
+          })
+          .popover(isPresented: $showAbout, arrowEdge: .bottom) {
+            VStack(spacing: 16) {
+              Text("Zonic is made available under MIT license. The DB is made available under ODbL.")
+                .multilineTextAlignment(.center)
+                .font(.caption)
+            }
+            .padding()
+            .frame(minWidth: 300)
+          }
           
           Spacer()
           Button("Quit") {
@@ -121,21 +131,6 @@ struct ZyloqApp: App {
       }
       .onDisappear {
         searchText = ""
-      }
-      .sheet(isPresented: $showAbout) {
-        VStack(spacing: 16) {
-          Text("Zonic").font(.headline)
-          
-          Text("Information from this database is made available under the Open Database License (ODbL).")
-          .multilineTextAlignment(.center)
-          .font(.caption)
-          
-          Button("Done") {
-            showAbout = false
-          }
-        }
-        .padding()
-        .frame(minWidth: 300)
       }
     }
     .menuBarExtraStyle(.window)
