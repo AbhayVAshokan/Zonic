@@ -17,15 +17,22 @@ A macOS Menu Bar application that displays the current time for the cities in di
 
 > Supported on macOS 14 (Sonoma) or newer.
 
-1.  **Download the latest release:**
-    Download the `Zonic` App from the [GitLab Releases page](https://gitlab.com/abhayvashokan/Zonic/-/releases) and extract the Zip file.
-2.  **Move to Applications folder:**
-    Drag `Zonic.app` to your `/Applications` folder.
-3.  **Add to Login Items (Optional):**
+1.  **Install with Homebrew:**
+
+    ```bash
+    brew tap AbhayVAshokan/tools
+    brew install --cask zonic
+    ```
+
+    **Note:** Zonic is currently unverified as I do not own an Apple Developer account. When you first try to open the app, macOS might display a warning stating "Apple could not verify that Zonic is free of malware." To bypass this:
+    - Go to **System Settings** > **Privacy & Security**.
+    - Scroll down and click the **Open Anyway** button, which will appear briefly after your attempt to open the app.
+
+2.  **Add to Login Items (Optional):**
     For Zonic to launch automatically when you log in, add it to your Login Items:
     - Open **System Settings** (or System Preferences).
     - Go to **General** > **Login Items**.
-    - Click the **+** button under "Open at Login" and select `Zonic.app` from your `/Applications` folder.
+    - Click the **+** button under "Open at Login" and select `Zonic` from your `/Applications` folder.
 
 ## Data Source
 
